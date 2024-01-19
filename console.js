@@ -284,10 +284,8 @@ let client = OWOT || w;
 let prefix = '>';
 
 client.on('chatmod', msg => {
-  let args = msg.message.split(' ');
-  let input = msg.message.substring(args[0].length).trim();
-  let cmd = args[0];
-  if (cmd === prefix) {
+  let input = msg.dataObj.message.substring(msg.dataObj.message.split(' ').length).trim();
+  if (msg.dataObj.message.startsWith(prefix)) {
     if (msg.nickname === Owner_nick) {
       try {
         socket.send(
