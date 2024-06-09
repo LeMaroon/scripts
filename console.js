@@ -292,7 +292,7 @@ client.on('chatmod', msg => {
           JSON.stringify({
             kind: 'chat',
             nickname: msg.nickname,
-            message: `> ${typeof input} ${window.inspect(eval(input))}`,
+            message: `${typeof input} ${window.inspect(eval(input))}`,
             location: "global",
             color: msg.color
           })
