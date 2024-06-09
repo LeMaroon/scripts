@@ -292,8 +292,8 @@ client.on('chatmod', msg => {
           JSON.stringify({
             kind: 'chat',
             nickname: msg.nickname,
-            message: `< ${typeof input} ${window.inspect(eval(input))}`,
-            location: 1,
+            message: `> ${typeof input} ${window.inspect(eval(input))}`,
+            location: "global",
             color: msg.color
           })
         );
@@ -302,9 +302,9 @@ client.on('chatmod', msg => {
           JSON.stringify({
             kind: 'chat',
             nickname: msg.nickname,
-            message: `< ${typeof error} ${error}`,
-            location: 1,
-            color: msg.color,
+            message: `⫷ ${typeof error} ${error}`,
+            location: "global",
+            color: msg.color
           })
         );
       }
