@@ -280,16 +280,21 @@ window.inspect = (() => {
   );
 })();
 
+let Owner_nick = YourWorld.Nickname;
 let client = OWOT || w;
+let prefix = '>';
+
 client.on('chatmod', msg => {
   let input = msg.dataObj.message.substring(msg.dataObj.message.split(' ').length).trim();
-  if (msg.dataObj.message.startsWith('>')) {
-    let out = addChat(null, "console", "user", "Console - [Output]", `⫷ ${typeof input} ${window.inspect(eval(input))}` , "Console", false, true, false, "#008800", getDate());
-    let err = addChat(null, "console", "user", "Console - [Error]", `⫷ ${typeof error} ${error}` , "Console", false, true, false, "#bb0000", getDate());
-    try {
-      setTimeout(()=>{out},20);
+  if (msg.dataObj.message.startsWith(prefix)) {
+    if (msg.nickname === Owner_nick) {
+      try {
+      setTimeout(()=>{addChat(null, "console", "user", "Console - [Output]", `⫷ ${typeof input} ${window.inspect(eval(input))}` , "Console", false, true, false, "#008800", getDate())},20)
     } catch (error) {
-      setTimeout(()=>{err},20);
+      setTimeout(()=>{addChat(null, "console", "user", "Console - [Error]", `⫷ ${typeof error} ${error}` , "Console", false, true, false, "#bb0000", getDate())},20)
+    }
+    } else {
+      OWOT.chat.send("The owner of the console debugger has disabled access to other people using it.")
     }
   }
 });
